@@ -35,10 +35,27 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storeFile = keystoreProperties.getProperty("storeFile")?.let { file(it) }
-            storePassword = keystoreProperties.getProperty("storePassword")
+            val keystoreBase64 = System.getenv("CM_KEYSTORE")
+            if (keystoreBase64 != null && keystoreBase64.isNotEmpty()) {
+                // Codemagic environment — decode keystore from base64
+                val keystoreFile = rootProject.file("release.jks")
+                keystoreFile.writeBytes(java.util.Base64.getDecoder().decode(keystoreBase64))
+                storeFile = keystoreFile
+                storePassword = System.getenv("CM_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("CM_KEY_ALIAS")
+                keyPassword = System.getenv("CM_KEY_PASSWORD")
+            } else {
+                // Local environment — read from local.properties
+                val localPropsFile = rootProject.file("local.properties")
+                val keystoreProperties = Properties()
+                if (localPropsFile.exists()) {
+                    keystoreProperties.load(FileInputStream(localPropsFile))
+                }
+                keyAlias = keystoreProperties.getProperty("keyAlias") ?: ""
+                keyPassword = keystoreProperties.getProperty("keyPassword") ?: ""
+                storeFile = keystoreProperties.getProperty("storeFile")?.let { file(it) }
+                storePassword = keystoreProperties.getProperty("storePassword") ?: ""
+            }
         }
     }
 
