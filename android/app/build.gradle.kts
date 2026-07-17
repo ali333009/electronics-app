@@ -1,4 +1,5 @@
 import java.util.Properties
+import java.util.Base64
 import java.io.FileInputStream
 
 plugins {
@@ -12,6 +13,13 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Load local keystore properties (for local development)
+val localKeystoreProperties = Properties()
+val localKeystorePropertiesFile = rootProject.file("local.properties")
+if (localKeystorePropertiesFile.exists()) {
+    localKeystoreProperties.load(FileInputStream(localKeystorePropertiesFile))
+}
+
 android {
     namespace = "com.elct.app"
     compileSdk = flutter.compileSdkVersion
@@ -23,38 +31,29 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
-    val keystorePropertiesFile = rootProject.file("local.properties")
-    val keystoreProperties = Properties()
-    if (keystorePropertiesFile.exists()) {
-        keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
 
     signingConfigs {
         create("release") {
             val keystoreBase64 = System.getenv("CM_KEYSTORE")
             if (keystoreBase64 != null && keystoreBase64.isNotEmpty()) {
-                // Codemagic environment — decode keystore from base64
+                // Codemagic CI environment — decode keystore from base64
                 val keystoreFile = rootProject.file("release.jks")
-                keystoreFile.writeBytes(java.util.Base64.getDecoder().decode(keystoreBase64))
+                keystoreFile.writeBytes(Base64.getDecoder().decode(keystoreBase64))
                 storeFile = keystoreFile
                 storePassword = System.getenv("CM_KEYSTORE_PASSWORD")
                 keyAlias = System.getenv("CM_KEY_ALIAS")
                 keyPassword = System.getenv("CM_KEY_PASSWORD")
             } else {
-                // Local environment — read from local.properties
-                val localPropsFile = rootProject.file("local.properties")
-                val keystoreProperties = Properties()
-                if (localPropsFile.exists()) {
-                    keystoreProperties.load(FileInputStream(localPropsFile))
-                }
-                keyAlias = keystoreProperties.getProperty("keyAlias") ?: ""
-                keyPassword = keystoreProperties.getProperty("keyPassword") ?: ""
-                storeFile = keystoreProperties.getProperty("storeFile")?.let { file(it) }
-                storePassword = keystoreProperties.getProperty("storePassword") ?: ""
+                // Local development environment — read from local.properties
+                keyAlias = localKeystoreProperties.getProperty("keyAlias") ?: ""
+                keyPassword = localKeystoreProperties.getProperty("keyPassword") ?: ""
+                storeFile = localKeystoreProperties.getProperty("storeFile")?.let { file(it) }
+                storePassword = localKeystoreProperties.getProperty("storePassword") ?: ""
             }
         }
     }
