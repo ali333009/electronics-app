@@ -1,0 +1,60 @@
+version: "2"
+type: frontend
+tech_stack:
+  - flutter
+  - dart
+  - riverpod
+  - firebase
+  - go_router
+routes:
+  - path: /splash
+    file: lib/features/auth/presentation/screens/splash_screen.dart
+    auth_required: false
+    description: App splash screen
+  - path: /login
+    file: lib/features/auth/presentation/screens/login_screen.dart
+    auth_required: false
+    description: User login page
+  - path: /register
+    file: lib/features/auth/presentation/screens/register_screen.dart
+    auth_required: false
+    description: User registration page
+  - path: /home
+    file: lib/features/home/presentation/screens/home_screen.dart
+    auth_required: false
+    description: Home screen with product feeds
+  - path: /cart
+    file: lib/features/cart/presentation/screens/cart_screen.dart
+    auth_required: true
+    description: User cart
+features:
+  - name: User Login
+    description: Login with email and password credentials
+    files:
+      - lib/features/auth/presentation/screens/login_screen.dart
+      - lib/features/auth/presentation/providers/auth_provider.dart
+    entry_route: /login
+    user_interactions:
+      - Fill email input field
+      - Fill password input field
+      - Click Login button to submit
+      - See error message on invalid credentials
+    api_calls:
+      - method: POST
+        endpoint: firebase/auth/login
+    auth_required: false
+  - name: Add to Cart
+    description: Add a product to cart from product detail
+    files:
+      - lib/features/product_detail/presentation/screens/product_detail_screen.dart
+      - lib/features/cart/presentation/screens/cart_screen.dart
+    entry_route: /home
+    user_interactions:
+      - Navigate to product detail
+      - Tap Add to Cart button
+      - See cart badge update
+    api_calls:
+      - method: POST
+        endpoint: firebase/firestore/cart
+    auth_required: true
+known_limitations: []

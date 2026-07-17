@@ -1,0 +1,19 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8080",
+  "loginUser": "ali1@gmail.com",
+  "loginPassword": "12345678",
+  "executionArgs": {
+    "projectName": "elct",
+    "projectPath": "c:\\Users\\VICTUS\\OneDrive - Egyptian E-Learning University\\Desktop\\elct",
+    "testIds": [],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-T5pMRyfpBO7gJmRwwp_un5vNz3DaXlvQ_vBSMudb5eRoe-k7g-JK7eiYXzdo4TrOwq_znjg1Dy8oN3H6vzhN5vDBY4bpwk5uzmd9HT8GS8tcKm8gVxdqCA5Ru047El31J0c"
+    }
+  },
+  "serverPort": 7322
+}

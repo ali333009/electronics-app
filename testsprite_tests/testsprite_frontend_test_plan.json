@@ -1,0 +1,1104 @@
+[
+  {
+    "id": "TC001",
+    "title": "Complete checkout with shipping details and cash on delivery",
+    "description": "Verifies that a logged-in shopper can enter shipping information, select cash on delivery, place an order, and see the success screen.",
+    "category": "Checkout and Order Placement",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /cart"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to checkout"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping name field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping phone number field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping address field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping city field"
+      },
+      {
+        "type": "action",
+        "description": "Select cash on delivery as the payment method"
+      },
+      {
+        "type": "action",
+        "description": "Place the order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order success screen is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Log in and reach the home screen",
+    "description": "Verifies that a registered shopper can log in with valid credentials and land on the home screen.",
+    "category": "Authentication",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the home screen is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Add a product to the cart from its detail page",
+    "description": "Verifies that a shopper can choose a quantity on a product page and add the item to the cart successfully.",
+    "category": "Product Detail",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the product feed"
+      },
+      {
+        "type": "action",
+        "description": "Select a quantity for the product"
+      },
+      {
+        "type": "action",
+        "description": "Add the product to the cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cart badge updates"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is added to the cart"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Register a new account and complete verification",
+    "description": "Verifies that a new shopper can create an account, complete phone verification, and land on the home screen.",
+    "category": "Authentication",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /register"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the first name field with Test"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the last name field with User"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the phone number field with a valid phone number"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with a unique valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a valid password"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the confirm password field with the same password"
+      },
+      {
+        "type": "action",
+        "description": "Agree to the terms"
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form"
+      },
+      {
+        "type": "action",
+        "description": "Enter a valid phone verification code"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the home screen is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Update cart quantities and remove an item",
+    "description": "Verifies that a logged-in shopper can manage cart contents and see totals update accordingly.",
+    "category": "Cart Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /cart"
+      },
+      {
+        "type": "action",
+        "description": "Update an item quantity in the cart"
+      },
+      {
+        "type": "action",
+        "description": "Remove an item from the cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cart total updates"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the cart reflects the removal"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Browse home banners categories and product feeds",
+    "description": "Verifies that a shopper can explore the home screen content and open a product from the feed.",
+    "category": "Home Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to browse the home content"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the feed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a product detail screen is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "View product details before buying",
+    "description": "Verifies that a shopper can open a product, review its details, and see related shopping information before taking action.",
+    "category": "Product Detail",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the product feed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify related products are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Search for a product and open a matching result",
+    "description": "Verifies that a shopper can search for a product, see matching results refresh, and open a result detail page.",
+    "category": "Product Discovery Search",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open the search experience"
+      },
+      {
+        "type": "action",
+        "description": "Enter a product query"
+      },
+      {
+        "type": "action",
+        "description": "Wait for search results to refresh"
+      },
+      {
+        "type": "action",
+        "description": "Open a matching product"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a product detail screen is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Switch product filters and open a product from the grid",
+    "description": "Verifies that a shopper can change home product filters, browse the filtered grid, and open a product detail page.",
+    "category": "Home Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Switch to a different product filter"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the filtered grid"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a product detail screen is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "View order history and open an order",
+    "description": "This verifies that a logged-in shopper can browse their order list and open an order to see its details.",
+    "category": "Orders",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the orders screen"
+      },
+      {
+        "type": "action",
+        "description": "Open a recent order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order status tracker is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Save and remove a product from wishlist",
+    "description": "Verifies that a shopper can toggle wishlist status from a product page and see the saved state change.",
+    "category": "Product Detail",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the product feed"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the product wishlist status"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is saved to the wishlist"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the product wishlist status again"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is removed from the wishlist"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Update profile information",
+    "description": "This verifies that a logged-in shopper can edit personal information and see the updated profile reflected afterward.",
+    "category": "Profile and Account Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the profile screen"
+      },
+      {
+        "type": "action",
+        "description": "Open profile editing"
+      },
+      {
+        "type": "action",
+        "description": "Update personal information"
+      },
+      {
+        "type": "action",
+        "description": "Save the profile changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated profile details are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Manage addresses from profile settings",
+    "description": "This verifies that a logged-in shopper can add, edit, delete, and set a default address from profile settings.",
+    "category": "Profile and Account Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the profile screen"
+      },
+      {
+        "type": "action",
+        "description": "Open address management"
+      },
+      {
+        "type": "action",
+        "description": "Add a new address"
+      },
+      {
+        "type": "action",
+        "description": "Edit an existing address"
+      },
+      {
+        "type": "action",
+        "description": "Delete an address"
+      },
+      {
+        "type": "action",
+        "description": "Set an address as default"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the address list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the default address is updated"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC014",
+    "title": "Browse products by category and open a result",
+    "description": "Verifies that a shopper can select a category from discovery and open a product from the category grid.",
+    "category": "Product Discovery Search",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open the categories experience"
+      },
+      {
+        "type": "action",
+        "description": "Select a category"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the category grid"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a product detail screen is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC015",
+    "title": "Review order details and status after purchase",
+    "description": "Verifies that a shopper can open a recent order and inspect its details and status tracker after placing an order.",
+    "category": "Checkout and Order Placement",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Open the orders section"
+      },
+      {
+        "type": "action",
+        "description": "Open a recent order"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify order details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order status tracker is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC016",
+    "title": "Add and remove a product from wishlist",
+    "description": "This verifies that a shopper can toggle a product’s wishlist status from the product detail screen.",
+    "category": "Wishlist",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the product feed"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the wishlist status on the product detail screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is added to wishlist"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the wishlist status again"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is removed from wishlist"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC017",
+    "title": "Apply a promo code during checkout",
+    "description": "Verifies that a logged-in shopper can enter shipping details, apply a promo code, and see the total update before placing an order.",
+    "category": "Checkout and Order Placement",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /cart"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to checkout"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping name field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping phone number field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping address field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the shipping city field"
+      },
+      {
+        "type": "action",
+        "description": "Apply a promo code"
+      },
+      {
+        "type": "action",
+        "description": "Select cash on delivery as the payment method"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order total is updated"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the applied discount is shown"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC018",
+    "title": "View saved products and open a wishlist item",
+    "description": "This verifies that a shopper can browse saved items in the wishlist and open a saved product from there.",
+    "category": "Wishlist",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the wishlist screen"
+      },
+      {
+        "type": "action",
+        "description": "Open a saved product"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product detail screen is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the product is still marked as saved"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC019",
+    "title": "Switch the app language from profile",
+    "description": "This verifies that a logged-in shopper can change the interface language and see the app update to the selected language.",
+    "category": "Profile and Account Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the profile screen"
+      },
+      {
+        "type": "action",
+        "description": "Change the language"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the interface updates to the selected language"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC020",
+    "title": "Browse product tabs and reviews",
+    "description": "Verifies that a shopper can switch between product information sections and inspect reviews before buying.",
+    "category": "Product Detail",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the product feed"
+      },
+      {
+        "type": "action",
+        "description": "Switch to the specifications section"
+      },
+      {
+        "type": "action",
+        "description": "Switch to the reviews section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product specifications are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product reviews are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC021",
+    "title": "Open a campaign page from a home banner and continue shopping",
+    "description": "Verifies that a shopper can navigate from a home banner to a campaign page and open a campaign product.",
+    "category": "Home Browsing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Tap a home banner"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the campaign products"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a product detail screen is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC022",
+    "title": "Submit a product review",
+    "description": "Verifies that a logged-in shopper can rate a product, write a comment, and see the review added on the product page.",
+    "category": "Product Detail",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Open a product from the product feed"
+      },
+      {
+        "type": "action",
+        "description": "Enter a review rating for the product"
+      },
+      {
+        "type": "action",
+        "description": "Write a review comment"
+      },
+      {
+        "type": "action",
+        "description": "Submit the review"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new review is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC023",
+    "title": "See an empty order history state",
+    "description": "This verifies that a logged-in shopper with no orders sees an empty orders experience and can return to shopping.",
+    "category": "Orders",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the orders screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state message is visible"
+      },
+      {
+        "type": "action",
+        "description": "Return to product browsing"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify product browsing content is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC024",
+    "title": "See an empty wishlist state",
+    "description": "This verifies that a shopper with no saved items sees the empty wishlist experience.",
+    "category": "Wishlist",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the wishlist screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state message is visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC025",
+    "title": "Log out from profile",
+    "description": "This verifies that a logged-in shopper can log out and return to the login screen.",
+    "category": "Profile and Account Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the profile screen"
+      },
+      {
+        "type": "action",
+        "description": "Log out"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the login screen is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC026",
+    "title": "Clear the cart and see an empty state",
+    "description": "Verifies that a logged-in shopper can clear all cart items and land on an empty cart view.",
+    "category": "Cart Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /cart"
+      },
+      {
+        "type": "action",
+        "description": "Clear the cart"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty cart state is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC027",
+    "title": "Delete the account from profile settings",
+    "description": "This verifies that a logged-in shopper can start account deletion, confirm it, and see the account removal flow.",
+    "category": "Profile and Account Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the login credentials with {{LOGIN_USER}} and {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the profile screen"
+      },
+      {
+        "type": "action",
+        "description": "Start account deletion"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the action"
+      },
+      {
+        "type": "action",
+        "description": "Re-authenticate"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the account removed flow is displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC028",
+    "title": "View empty notifications placeholder",
+    "description": "A guest or logged-in shopper can open notifications and see the empty placeholder state.",
+    "category": "Notifications Placeholder",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open the notifications area"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state message is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the notifications placeholder remains visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC029",
+    "title": "Refresh the notifications placeholder",
+    "description": "A shopper can refresh the notifications screen and still see the empty placeholder state.",
+    "category": "Notifications Placeholder",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open the notifications area"
+      },
+      {
+        "type": "action",
+        "description": "Pull to refresh the notifications screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state message is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the notifications placeholder remains visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC030",
+    "title": "Return to the placeholder after viewing notifications",
+    "description": "A shopper can revisit the notifications area from normal browsing and see the same empty placeholder state.",
+    "category": "Notifications Placeholder",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /home"
+      },
+      {
+        "type": "action",
+        "description": "Open the notifications area"
+      },
+      {
+        "type": "action",
+        "description": "Return to browsing"
+      },
+      {
+        "type": "action",
+        "description": "Open the notifications area again"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state message is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the notifications placeholder remains visible"
+      }
+    ],
+    "priority": "Low"
+  }
+]
