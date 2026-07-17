@@ -13,7 +13,7 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-// Load local keystore properties (for local development)
+// Load local keystore properties (for local development only)
 val localKeystoreProperties = Properties()
 val localKeystorePropertiesFile = rootProject.file("local.properties")
 if (localKeystorePropertiesFile.exists()) {
@@ -39,21 +39,35 @@ android {
 
     signingConfigs {
         create("release") {
-            val keystoreBase64 = System.getenv("CM_KEYSTORE")
-            if (keystoreBase64 != null && keystoreBase64.isNotEmpty()) {
-                // Codemagic CI environment — decode keystore from base64
-                val keystoreFile = rootProject.file("release.jks")
-                keystoreFile.writeBytes(Base64.getDecoder().decode(keystoreBase64))
-                storeFile = keystoreFile
-                storePassword = System.getenv("CM_KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("CM_KEY_ALIAS")
-                keyPassword = System.getenv("CM_KEY_PASSWORD")
-            } else {
-                // Local development environment — read from local.properties
-                keyAlias = localKeystoreProperties.getProperty("keyAlias") ?: ""
-                keyPassword = localKeystoreProperties.getProperty("keyPassword") ?: ""
-                storeFile = localKeystoreProperties.getProperty("storeFile")?.let { file(it) }
-                storePassword = localKeystoreProperties.getProperty("storePassword") ?: ""
+            // --- Codemagic: keystore uploaded via "Android code signing" UI ---
+            val cmKeystorePath = System.getenv("CM_KEYSTORE_PATH")
+            // --- Codemagic: keystore passed as base64 env variable ---
+            val cmKeystoreBase64 = System.getenv("CM_KEYSTORE")
+
+            when {
+                cmKeystorePath != null && cmKeystorePath.isNotEmpty() -> {
+                    // Codemagic "Android code signing" UI — file written automatically
+                    storeFile = file(cmKeystorePath)
+                    storePassword = System.getenv("CM_KEYSTORE_PASSWORD") ?: ""
+                    keyAlias = System.getenv("CM_KEY_ALIAS_USERNAME") ?: System.getenv("CM_KEY_ALIAS") ?: ""
+                    keyPassword = System.getenv("CM_KEY_ALIAS_PASSWORD") ?: System.getenv("CM_KEY_PASSWORD") ?: ""
+                }
+                cmKeystoreBase64 != null && cmKeystoreBase64.isNotEmpty() -> {
+                    // Codemagic custom env variables — decode base64 keystore
+                    val keystoreFile = rootProject.file("release.jks")
+                    keystoreFile.writeBytes(Base64.getDecoder().decode(cmKeystoreBase64))
+                    storeFile = keystoreFile
+                    storePassword = System.getenv("CM_KEYSTORE_PASSWORD") ?: ""
+                    keyAlias = System.getenv("CM_KEY_ALIAS_USERNAME") ?: System.getenv("CM_KEY_ALIAS") ?: ""
+                    keyPassword = System.getenv("CM_KEY_ALIAS_PASSWORD") ?: System.getenv("CM_KEY_PASSWORD") ?: ""
+                }
+                else -> {
+                    // Local development — read from local.properties
+                    keyAlias = localKeystoreProperties.getProperty("keyAlias") ?: ""
+                    keyPassword = localKeystoreProperties.getProperty("keyPassword") ?: ""
+                    storeFile = localKeystoreProperties.getProperty("storeFile")?.let { file(it) }
+                    storePassword = localKeystoreProperties.getProperty("storePassword") ?: ""
+                }
             }
         }
     }
