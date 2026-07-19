@@ -27,7 +27,9 @@ class CheckoutPaymentSection extends StatelessWidget {
           style: AppTypography.labelLarge,
         ),
         const SizedBox(height: 10),
-        ...PaymentMethod.values.map((method) => _buildPaymentCard(context, method)),
+        ...PaymentMethod.values
+            .where((method) => !method.isComingSoon)
+            .map((method) => _buildPaymentCard(context, method)),
       ],
     );
   }

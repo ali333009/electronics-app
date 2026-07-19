@@ -712,9 +712,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       }
     } else {
       password = await _showPasswordDialog(l10n);
-      if (password == null || password.isEmpty || !mounted) return;
+      if (password == null || password.isEmpty) return;
     }
 
+    if (!context.mounted) return;
     // Capture the router before the async gap to avoid context issues
     final router = GoRouter.of(context);
 
@@ -723,7 +724,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       // Defer navigation to next microtask so the widget tree
       // finishes processing the auth state change first
       Future.microtask(() {
-        if (mounted) router.go(Routes.login);
+        router.go(Routes.login);
       });
     } catch (e) {
       if (!context.mounted) return;
