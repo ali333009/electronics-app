@@ -636,11 +636,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 Icons.check_circle,
                 color: current == 'ar' ? AppColors.gold : Colors.transparent,
               ),
-              title: const Text(
-                'العربية',
+              title: Text(
+                AppLocalizations.of(context)!.arabic,
                 style: AppTypography.labelLarge,
               ),
-              subtitle: Text('Arabic',
+              subtitle: Text(AppLocalizations.of(context)!.arabicSubtitle,
                 style: AppTypography.caption.copyWith(color: AppColors.textMuted)),
               onTap: () {
                 Navigator.pop(ctx);
@@ -653,11 +653,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 Icons.check_circle,
                 color: current == 'en' ? AppColors.gold : Colors.transparent,
               ),
-              title: const Text(
+              title: Text(
                 'English',
                 style: AppTypography.labelLarge,
               ),
-              subtitle: Text('الإنجليزية',
+              subtitle: Text(AppLocalizations.of(context)!.englishSubtitle,
                 style: AppTypography.caption.copyWith(color: AppColors.textMuted)),
               onTap: () {
                 Navigator.pop(ctx);
@@ -715,62 +715,29 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       if (password == null || password.isEmpty || !mounted) return;
     }
 
+    // Capture the router before the async gap to avoid context issues
+    final router = GoRouter.of(context);
+
     try {
       await repo.deleteCurrentUser(password: password);
-      if (mounted) context.go(Routes.login);
+      // Defer navigation to next microtask so the widget tree
+      // finishes processing the auth state change first
+      Future.microtask(() {
+        if (mounted) router.go(Routes.login);
+      });
     } catch (e) {
-      if (!mounted) return;
+      if (!context.mounted) return;
       AppToast.show(context, userErrorMessage(e, l10n), icon: Icons.error_outline);
     }
   }
 
-  Future<String?> _showPasswordDialog(AppLocalizations l10n) async {
-    final controller = TextEditingController();
-    final obscureNotifier = ValueNotifier<bool>(true);
-    try {
-      return await showDialog<String>(
-        context: context,
-        barrierDismissible: false,
-        builder: (ctx) => AlertDialog(
-          backgroundColor: AppColors.surfaceCard,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: Text(l10n.deleteAccountTitle, style: AppTypography.labelLarge),
-          content: ValueListenableBuilder<bool>(
-            valueListenable: obscureNotifier,
-            builder: (ctx, obscure, _) => TextField(
-              controller: controller,
-              obscureText: obscure,
-              autofocus: true,
-              decoration: InputDecoration(
-                labelText: l10n.password,
-                labelStyle: AppTypography.bodyLarge,
-                suffixIcon: IconButton(
-                  icon: Icon(obscure ? Icons.visibility_off : Icons.visibility),
-                  onPressed: () => obscureNotifier.value = !obscure,
-                ),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx, ''),
-              child: Text(l10n.cancel, style: AppTypography.bodyLarge.copyWith(color: AppColors.textSecondary)),
-            ),
-            TextButton(
-              onPressed: () => Navigator.pop(ctx, controller.text),
-              child: Text(l10n.confirm, style: AppTypography.bodyLarge.copyWith(color: AppColors.error)),
-            ),
-          ],
-        ),
-      );
-    } finally {
-      controller.dispose();
-    }
+  Future<String?> _showPasswordDialog(AppLocalizations l10n) {
+    return showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _PasswordDialog(l10n: l10n),
+    );
   }
-
-
-
 
   void _confirmLogout() {
     showDialog(
@@ -806,4 +773,56 @@ class _SocialLink {
   final String url;
 
   const _SocialLink(this.icon, this.color, this.url);
+}
+
+class _PasswordDialog extends StatefulWidget {
+  final AppLocalizations l10n;
+  const _PasswordDialog({required this.l10n});
+
+  @override
+  State<_PasswordDialog> createState() => _PasswordDialogState();
+}
+
+class _PasswordDialogState extends State<_PasswordDialog> {
+  final _controller = TextEditingController();
+  bool _obscure = true;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: AppColors.surfaceCard,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      title: Text(widget.l10n.deleteAccountTitle, style: AppTypography.labelLarge),
+      content: TextField(
+        controller: _controller,
+        obscureText: _obscure,
+        autofocus: true,
+        decoration: InputDecoration(
+          labelText: widget.l10n.password,
+          labelStyle: AppTypography.bodyLarge,
+          suffixIcon: IconButton(
+            icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+            onPressed: () => setState(() => _obscure = !_obscure),
+          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, ''),
+          child: Text(widget.l10n.cancel, style: AppTypography.bodyLarge.copyWith(color: AppColors.textSecondary)),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, _controller.text),
+          child: Text(widget.l10n.confirm, style: AppTypography.bodyLarge.copyWith(color: AppColors.error)),
+        ),
+      ],
+    );
+  }
 }

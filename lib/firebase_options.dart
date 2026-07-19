@@ -52,21 +52,21 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAwsrrYIK67y9amE_YDluzthqg6-AToPik',
-    appId: '1:156963900259:android:c61c12d220fd66e1232156',
+    appId: '1:156963900259:android:185e187a953c370d232156',
     messagingSenderId: '156963900259',
     projectId: 'electronics-3c376',
     storageBucket: 'electronics-3c376.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCM33XhzmDNgK7YBDJJd1Cl4iygmPZfT6s',
-    appId: '1:156963900259:ios:a9f544306fd986f4232156',
+    appId: '1:156963900259:ios:dfe90192a42953ef232156',
     messagingSenderId: '156963900259',
     projectId: 'electronics-3c376',
     storageBucket: 'electronics-3c376.firebasestorage.app',
-    iosBundleId: 'com.example.elct',
+    androidClientId: '156963900259-365snd88da1huq4ksjt9rjnhbpsdf2i7.apps.googleusercontent.com',
+    iosClientId: '156963900259-hfhf44uvpnjrlbmdh91cevfng26n78pq.apps.googleusercontent.com',
+    iosBundleId: 'com.elct.app',
   );
-
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCM33XhzmDNgK7YBDJJd1Cl4iygmPZfT6s',
     appId: '1:156963900259:ios:a9f544306fd986f4232156',

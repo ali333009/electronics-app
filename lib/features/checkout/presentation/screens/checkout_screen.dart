@@ -202,24 +202,26 @@ class CheckoutScreen extends ConsumerWidget {
     final fastCost = settings.fastCostForSubtotal(subtotal);
     final threshold = settings.freeShippingThreshold;
     final isFreeNormal = normalCost == 0;
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
+
+    final l10n = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context);
 
     final deliveryOptions = [
       (
         type: 'normal',
         icon: Icons.local_shipping_outlined,
-        label: isRtl ? 'توصيل عادي' : 'Standard Delivery',
+        label: l10n.standardDeliveryLabel,
         description: isFreeNormal
-            ? (isRtl ? 'توصيل مجاني 🎉' : 'Free shipping 🎉')
-            : settings.normalDescription,
+            ? l10n.freeShippingLabel
+            : settings.localizedNormalDescription(locale),
         cost: normalCost,
         color: AppColors.gold,
       ),
       (
         type: 'fast',
         icon: Icons.bolt_rounded,
-        label: isRtl ? 'توصيل سريع ⚡' : 'Express Delivery ⚡',
-        description: settings.expressDescription,
+        label: l10n.expressDeliveryLabel,
+        description: settings.localizedExpressDescription(locale),
         cost: fastCost,
         color: const Color(0xFF6366f1),
       ),
@@ -241,9 +243,7 @@ class CheckoutScreen extends ConsumerWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    isRtl
-                      ? 'تبقى ${formatPrice(threshold - subtotal, currency)} فقط لشحن مجاني 🚚'
-                      : 'Only ${formatPrice(threshold - subtotal, currency)} left for free shipping 🚚',
+                    l10n.freeShippingThreshold(formatPrice(threshold - subtotal, currency)),
                     style: TextStyle(color: Colors.green.shade800, fontSize: 12.5, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -297,7 +297,7 @@ class CheckoutScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    opt.cost == 0 ? (isRtl ? 'مجاني' : 'Free') : formatPrice(opt.cost, currency),
+                    opt.cost == 0 ? l10n.free : formatPrice(opt.cost, currency),
                     style: AppTypography.bodyMedium.copyWith(
                       fontWeight: FontWeight.bold,
                       color: opt.cost == 0 ? Colors.green : opt.color,
@@ -322,12 +322,13 @@ class CheckoutScreen extends ConsumerWidget {
 
         // Date & Time picker
         const SizedBox(height: 8),
-        _buildDateTimePicker(context, settings, state, controller, isRtl),
+        _buildDateTimePicker(context, settings, state, controller),
       ],
     );
   }
 
-  Widget _buildDateTimePicker(BuildContext context, ShippingSettings settings, CheckoutState state, CheckoutController controller, bool isRtl) {
+  Widget _buildDateTimePicker(BuildContext context, ShippingSettings settings, CheckoutState state, CheckoutController controller) {
+    final l10n = AppLocalizations.of(context)!;
     final selectedDate = state.deliveryDate;
     final selectedTime = state.deliveryTime;
     final isExpress = state.deliveryType == 'fast';
@@ -354,7 +355,7 @@ class CheckoutScreen extends ConsumerWidget {
           Row(children: [
             const Icon(Icons.calendar_month_outlined, color: AppColors.gold, size: 20),
             const SizedBox(width: 8),
-            Text(isRtl ? 'موعد التوصيل المفضل' : 'Preferred Delivery Time', style: AppTypography.labelLarge),
+            Text(l10n.preferredDeliveryTime, style: AppTypography.labelLarge),
           ]),
           const SizedBox(height: 12),
 
@@ -395,7 +396,7 @@ class CheckoutScreen extends ConsumerWidget {
                   Text(
                     selectedDate != null
                       ? '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}'
-                      : (isRtl ? 'اختر التاريخ' : 'Choose date'),
+                      : l10n.chooseDate,
                     style: TextStyle(
                       color: selectedDate != null ? AppColors.textPrimary : AppColors.textMuted,
                       fontWeight: selectedDate != null ? FontWeight.w600 : FontWeight.normal,

@@ -218,7 +218,10 @@ class _ProductCardState extends State<ProductCard>
                               child: _buildBadge(AppLocalizations.of(context)!.newLabel, AppColors.badgeNew),
                             ),
                           if (widget.product.isBestSeller)
-                            _buildBadge(AppLocalizations.of(context)!.bestSeller, AppColors.goldLight, icon: Icons.star),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.only(start: 4),
+                              child: _buildBadge(AppLocalizations.of(context)!.bestSeller, AppColors.badgeBestSeller),
+                            ),
                         ],
                       ),
                     ),

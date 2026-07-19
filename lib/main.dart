@@ -60,8 +60,12 @@ Future<void> _runApp() async {
       );
     } else {
       await FirebaseAppCheck.instance.activate(
-        providerAndroid: AndroidPlayIntegrityProvider(),
-        providerApple: AppleDeviceCheckProvider(),
+        providerAndroid: kDebugMode
+            ? AndroidDebugProvider()
+            : AndroidPlayIntegrityProvider(),
+        providerApple: kDebugMode
+            ? AppleDebugProvider()
+            : AppleAppAttestProvider(),
       );
     }
   } catch (e) {
@@ -97,7 +101,6 @@ Future<void> _runApp() async {
     ),
   );
 
-  FlutterNativeSplash.remove();
   unawaited(_initializeOnlineServices());
 }
 

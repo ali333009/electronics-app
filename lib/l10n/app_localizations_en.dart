@@ -1246,4 +1246,181 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exitConfirm => 'Are you sure you want to exit the app?';
+
+  @override
+  String get standardDeliveryLabel => 'Standard Delivery';
+
+  @override
+  String get freeShippingLabel => 'Free shipping 🎉';
+
+  @override
+  String get expressDeliveryLabel => 'Express Delivery ⚡';
+
+  @override
+  String freeShippingThreshold(String price) {
+    return 'Only $price left for free shipping 🚚';
+  }
+
+  @override
+  String get preferredDeliveryTime => 'Preferred Delivery Time';
+
+  @override
+  String get chooseDate => 'Choose date';
+
+  @override
+  String get phoneLoginTitle => 'Phone Login';
+
+  @override
+  String get phoneLoginSubtitle =>
+      'Enter your phone number to receive a verification code';
+
+  @override
+  String get phoneLabel => 'Phone Number';
+
+  @override
+  String get phoneHintExample => 'Example: 66123456';
+
+  @override
+  String get continueButton => 'Continue';
+
+  @override
+  String get welcomeTitle => 'Welcome!';
+
+  @override
+  String get completeProfileSubtitle =>
+      'Please complete your information so we can deliver your orders successfully';
+
+  @override
+  String get optionalHint => 'Optional';
+
+  @override
+  String get saveAndContinue => 'Save & Continue';
+
+  @override
+  String get otpEnterCode => 'Enter verification code';
+
+  @override
+  String otpSentTo(String phone) {
+    return 'A 6-digit code has been sent to\n$phone';
+  }
+
+  @override
+  String get resendFailed => 'Resend failed. Try again.';
+
+  @override
+  String get otpCodeRequired => 'Please enter the full 6-digit code';
+
+  @override
+  String get passwordMin8 => 'Password must be at least 8 characters';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get passwordChangedSuccess =>
+      'Password changed successfully!\nYou can now log in with your new password.';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get enterVerificationCode => 'Enter Verification Code';
+
+  @override
+  String resendInSeconds(int seconds) {
+    return 'Resend in ${seconds}s';
+  }
+
+  @override
+  String get newPasswordLabel => 'New Password';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get invalidPhoneNumber =>
+      'Invalid phone number. Check country code and number.';
+
+  @override
+  String get tooManyRequests => 'Too many attempts. Try again later.';
+
+  @override
+  String get connectionError => 'Connection error.';
+
+  @override
+  String get genericError =>
+      'An error occurred. Check the number and try again.';
+
+  @override
+  String get enterValidPhone => 'Enter a valid phone number';
+
+  @override
+  String get sendVerificationCode => 'Send Verification Code';
+
+  @override
+  String get loginWithPhone => 'Login with Phone (OTP)';
+
+  @override
+  String get signInWithApple => 'Sign in with Apple';
+
+  @override
+  String get orderStatusPlaced => 'Order Placed';
+
+  @override
+  String get orderStatusProcessing => 'Processing';
+
+  @override
+  String get orderStatusDeliveredLabel => 'Delivered';
+
+  @override
+  String get orderStatusCancelledLabel => 'Cancelled';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterOrderPlaced => 'Order Placed';
+
+  @override
+  String get filterProcessing => 'Processing';
+
+  @override
+  String get filterDelivered => 'Delivered';
+
+  @override
+  String get filterCancelled => 'Cancelled';
+
+  @override
+  String get selectLanguage => 'Select Language';
+
+  @override
+  String get selectCurrency => 'Select Currency';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get arabicSubtitle => 'Arabic';
+
+  @override
+  String get englishSubtitle => 'English';
+
+  @override
+  String get popularProductsTitle => 'Popular Products';
+
+  @override
+  String selectOptionFirst(String option) {
+    return 'Please select $option first';
+  }
+
+  @override
+  String get hideReviews => 'Hide Reviews';
+
+  @override
+  String get priceChangedError =>
+      'Some product prices have changed. Please re-add them to cart.';
+
+  @override
+  String get googleSignInRequired =>
+      'You previously signed up with Google. Please sign in with Google.';
 }

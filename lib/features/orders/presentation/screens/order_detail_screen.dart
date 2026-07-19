@@ -224,11 +224,11 @@ class OrderDetailScreen extends ConsumerWidget {
             // Progress tracker lines
             Row(
               children: [
-                _buildTrackerNode('تم الطلب', currentStep >= 0),
+                _buildTrackerNode(l10n.orderStatusPlaced, currentStep >= 0),
                 _buildTrackerLine(currentStep >= 1),
-                _buildTrackerNode('قيد المعالجة', currentStep >= 1),
+                _buildTrackerNode(l10n.orderStatusProcessing, currentStep >= 1),
                 _buildTrackerLine(currentStep >= 2),
-                _buildTrackerNode('تم التوصيل', currentStep >= 2),
+                _buildTrackerNode(l10n.orderStatusDeliveredLabel, currentStep >= 2),
               ],
             ),
           ] else ...[
@@ -577,14 +577,14 @@ class OrderDetailScreen extends ConsumerWidget {
   String _statusLabel(OrderStatus status, AppLocalizations l10n) {
     switch (status) {
       case OrderStatus.pending:
-        return 'تم الطلب';
+        return l10n.orderStatusPlaced;
       case OrderStatus.confirmed:
       case OrderStatus.shipped:
-        return 'قيد المعالجة';
+        return l10n.orderStatusProcessing;
       case OrderStatus.delivered:
-        return 'تم التوصيل';
+        return l10n.orderStatusDeliveredLabel;
       case OrderStatus.cancelled:
-        return 'ملغي';
+        return l10n.orderStatusCancelledLabel;
     }
   }
 

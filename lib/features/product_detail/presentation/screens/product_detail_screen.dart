@@ -296,7 +296,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
       if (!_selectedOptions.containsKey(entry.key)) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('الرجاء اختيار ${entry.key} أولاً'),
+            content: Text(AppLocalizations.of(context)!.selectOptionFirst(entry.key)),
             backgroundColor: Colors.orange,
           ),
         );

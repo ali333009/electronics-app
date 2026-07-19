@@ -12,32 +12,46 @@ setGlobalOptions({ maxInstances: 10, region: "us-central1" });
 // ─── خريطة الحالات: قيمة Firestore → رسالة الإشعار ────────────────────────
 const STATUS_MESSAGES = {
   ordered: {
-    title: "📦 تم استلام طلبك!",
-    body: "شكراً لطلبك! سنبدأ في معالجته قريباً.",
+    titleAr: "📦 تم استلام طلبك!",
+    bodyAr: "شكراً لطلبك! سنبدأ في معالجته قريباً.",
+    titleEn: "📦 Order Received!",
+    bodyEn: "Thank you for your order! We'll start processing it soon.",
   },
   pending: {
-    title: "⏳ طلبك قيد المراجعة",
-    body: "يتم مراجعة طلبك الآن. سنُعلمك عند التأكيد.",
+    titleAr: "⏳ طلبك قيد المراجعة",
+    bodyAr: "يتم مراجعة طلبك الآن. سنُعلمك عند التأكيد.",
+    titleEn: "⏳ Your Order is Under Review",
+    bodyEn: "Your order is being reviewed. We'll notify you once confirmed.",
   },
   confirmed: {
-    title: "✅ تم تأكيد طلبك!",
-    body: "رائع! طلبك تم تأكيده وجارٍ تجهيزه.",
+    titleAr: "✅ تم تأكيد طلبك!",
+    bodyAr: "رائع! طلبك تم تأكيده وجارٍ تجهيزه.",
+    titleEn: "✅ Order Confirmed!",
+    bodyEn: "Great! Your order has been confirmed and is being prepared.",
   },
   processing: {
-    title: "🔧 طلبك قيد التجهيز",
-    body: "فريقنا يجهز طلبك الآن بعناية.",
+    titleAr: "🔧 طلبك قيد التجهيز",
+    bodyAr: "فريقنا يجهز طلبك الآن بعناية.",
+    titleEn: "🔧 Your Order is Being Prepared",
+    bodyEn: "Our team is carefully preparing your order now.",
   },
   shipped: {
-    title: "🚚 طلبك في الطريق إليك!",
-    body: "تم شحن طلبك وهو في طريقه إليك.",
+    titleAr: "🚚 طلبك في الطريق إليك!",
+    bodyAr: "تم شحن طلبك وهو في طريقه إليك.",
+    titleEn: "🚚 Your Order is On Its Way!",
+    bodyEn: "Your order has been shipped and is on its way to you.",
   },
   delivered: {
-    title: "🎉 تم توصيل طلبك!",
-    body: "نأمل أن تستمتع بمشترياتك! لا تنسَ تقييم تجربتك.",
+    titleAr: "🎉 تم توصيل طلبك!",
+    bodyAr: "نأمل أن تستمتع بمشترياتك! لا تنسَ تقييم تجربتك.",
+    titleEn: "🎉 Your Order Has Been Delivered!",
+    bodyEn: "We hope you enjoy your purchase! Don't forget to rate your experience.",
   },
   cancelled: {
-    title: "❌ تم إلغاء طلبك",
-    body: "للأسف تم إلغاء طلبك. تواصل معنا لأي استفسار.",
+    titleAr: "❌ تم إلغاء طلبك",
+    bodyAr: "للأسف تم إلغاء طلبك. تواصل معنا لأي استفسار.",
+    titleEn: "❌ Your Order Has Been Cancelled",
+    bodyEn: "Unfortunately, your order has been cancelled. Contact us for any inquiries.",
   },
 };
 
@@ -72,15 +86,18 @@ exports.onOrderStatusChanged = onDocumentUpdated(
       return null;
     }
 
-    // 3. جيب الـ FCM token من Firestore
+    // 3. جيب الـ FCM token واللغة من Firestore
     let fcmToken;
+    let userLang = 'ar';
     try {
       const userDoc = await getFirestore().collection("users").doc(userId).get();
       if (!userDoc.exists) {
         logger.warn("[FCM] User doc not found", { userId });
         return null;
       }
-      fcmToken = userDoc.data()?.fcmToken;
+      const userData = userDoc.data();
+      fcmToken = userData?.fcmToken;
+      userLang = userData?.appLanguage || 'ar';
     } catch (err) {
       logger.error("[FCM] Error fetching user doc", { userId, err });
       return null;
@@ -98,13 +115,15 @@ exports.onOrderStatusChanged = onDocumentUpdated(
       return null;
     }
 
-    // 5. ابعت الـ FCM notification
+    // 5. ابعت الـ FCM notification باللغة المناسبة
     const shortOrderId = orderId.substring(0, 8).toUpperCase();
+    const title = userLang === 'en' && msgTemplate.titleEn ? msgTemplate.titleEn : msgTemplate.titleAr;
+    const body = userLang === 'en' && msgTemplate.bodyEn ? msgTemplate.bodyEn : msgTemplate.bodyAr;
     const message = {
       token: fcmToken,
       notification: {
-        title: msgTemplate.title,
-        body: `طلب #${shortOrderId} — ${msgTemplate.body}`,
+        title,
+        body: `${userLang === 'en' ? 'Order' : 'طلب'} #${shortOrderId} — ${body}`,
       },
       data: {
         type: "order",

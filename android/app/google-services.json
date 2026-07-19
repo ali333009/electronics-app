@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "156963900259-365snd88da1huq4ksjt9rjnhbpsdf2i7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elct.app",
+            "certificate_hash": "357d1cd1347823dec8d00ae67b578d666855423e"
+          }
+        },
+        {
           "client_id": "156963900259-vqe0ct5708o3k8pckv5muruq4sju9g9k.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -31,10 +39,11 @@
               "client_type": 3
             },
             {
-              "client_id": "156963900259-l0rtougjuu3e5g2vfh0jgs1hqt08elnp.apps.googleusercontent.com",
+              "client_id": "156963900259-hfhf44uvpnjrlbmdh91cevfng26n78pq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.elct"
+                "bundle_id": "com.elct.app",
+                "app_store_id": "6792096965"
               }
             }
           ]
@@ -67,10 +76,11 @@
               "client_type": 3
             },
             {
-              "client_id": "156963900259-l0rtougjuu3e5g2vfh0jgs1hqt08elnp.apps.googleusercontent.com",
+              "client_id": "156963900259-hfhf44uvpnjrlbmdh91cevfng26n78pq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.elct"
+                "bundle_id": "com.elct.app",
+                "app_store_id": "6792096965"
               }
             }
           ]

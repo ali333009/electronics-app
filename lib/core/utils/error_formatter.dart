@@ -47,7 +47,7 @@ String userErrorMessage(Object error, AppLocalizations l10n) {
       case 'UNKNOWN':
         return l10n.unexpectedError;
       case 'PLEASE_USE_GOOGLE_SIGN_IN':
-        return l10n.localeName == 'ar' ? 'لقد قمت بالتسجيل باستخدام جوجل مسبقاً. الرجاء تسجيل الدخول باستخدام حساب جوجل.' : 'You previously signed up with Google. Please sign in with Google.';
+        return l10n.googleSignInRequired;
       case 'NO_EMAIL':
         return l10n.noUserLoggedIn;
     }

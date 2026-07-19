@@ -105,7 +105,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
               children: [
                 const SizedBox(height: AppSpacing.xl),
                 Text(
-                  'أهلاً بك معنا!',
+                  t.welcomeTitle,
                   style: AppTypography.displayMedium.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -114,7 +114,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                 ).animate().fadeIn(duration: 400.ms),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  'يرجى استكمال بياناتك لنتمكن من توصيل طلباتك بنجاح',
+                  t.completeProfileSubtitle,
                   style: AppTypography.bodyLarge.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -145,7 +145,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                 AppTextField(
                   controller: _emailController,
                   label: t.email,
-                  hint: 'اختياري',
+                  hint: t.optionalHint,
                   keyboardType: TextInputType.emailAddress,
                 ).animate().fadeIn(delay: 400.ms, duration: 400.ms),
                 
@@ -162,7 +162,7 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
                 SizedBox(
                   height: 56,
                   child: AppButton(
-                    text: 'حفظ ومتابعة',
+                    text: t.saveAndContinue,
                     isLoading: _isLoading,
                     onPressed: _submit,
                   ),

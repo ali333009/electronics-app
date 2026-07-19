@@ -1240,4 +1240,179 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get exitConfirm => 'هل أنت متأكد من الخروج من التطبيق؟';
+
+  @override
+  String get standardDeliveryLabel => 'توصيل عادي';
+
+  @override
+  String get freeShippingLabel => 'توصيل مجاني 🎉';
+
+  @override
+  String get expressDeliveryLabel => 'توصيل سريع ⚡';
+
+  @override
+  String freeShippingThreshold(String price) {
+    return 'تبقى $price فقط لشحن مجاني 🚚';
+  }
+
+  @override
+  String get preferredDeliveryTime => 'موعد التوصيل المفضل';
+
+  @override
+  String get chooseDate => 'اختر التاريخ';
+
+  @override
+  String get phoneLoginTitle => 'تسجيل الدخول برقم الهاتف';
+
+  @override
+  String get phoneLoginSubtitle => 'أدخل رقم هاتفك لتصلك رسالة التفعيل';
+
+  @override
+  String get phoneLabel => 'رقم الهاتف';
+
+  @override
+  String get phoneHintExample => 'مثال: 66123456';
+
+  @override
+  String get continueButton => 'متابعة';
+
+  @override
+  String get welcomeTitle => 'أهلاً بك معنا!';
+
+  @override
+  String get completeProfileSubtitle =>
+      'يرجى استكمال بياناتك لنتمكن من توصيل طلباتك بنجاح';
+
+  @override
+  String get optionalHint => 'اختياري';
+
+  @override
+  String get saveAndContinue => 'حفظ ومتابعة';
+
+  @override
+  String get otpEnterCode => 'أدخل رمز التحقق';
+
+  @override
+  String otpSentTo(String phone) {
+    return 'تم إرسال رمز مكون من 6 أرقام إلى\n$phone';
+  }
+
+  @override
+  String get resendFailed => 'فشل إعادة الإرسال. حاول مرة أخرى.';
+
+  @override
+  String get otpCodeRequired => 'أدخل رمز التحقق كاملاً (6 أرقام)';
+
+  @override
+  String get passwordMin8 => 'كلمة المرور يجب أن تكون 8 أحرف على الأقل';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get passwordChangedSuccess =>
+      'تم تغيير كلمة المرور بنجاح.\nيمكنك الآن تسجيل الدخول بكلمة مرورك الجديدة.';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get enterVerificationCode => 'أدخل رمز التحقق';
+
+  @override
+  String resendInSeconds(int seconds) {
+    return 'إعادة الإرسال خلال $secondsث';
+  }
+
+  @override
+  String get newPasswordLabel => 'كلمة المرور الجديدة';
+
+  @override
+  String get confirmPasswordLabel => 'تأكيد كلمة المرور';
+
+  @override
+  String get invalidPhoneNumber =>
+      'رقم الهاتف غير صحيح. تأكد من كود الدولة والرقم.';
+
+  @override
+  String get tooManyRequests => 'محاولات كثيرة جداً. حاول لاحقاً.';
+
+  @override
+  String get connectionError => 'خطأ في الاتصال بالإنترنت.';
+
+  @override
+  String get genericError => 'حدث خطأ. تأكد من الرقم وحاول مجدداً.';
+
+  @override
+  String get enterValidPhone => 'أدخل رقم هاتف صحيح';
+
+  @override
+  String get sendVerificationCode => 'إرسال رمز التحقق';
+
+  @override
+  String get loginWithPhone => 'الدخول برقم الهاتف (OTP)';
+
+  @override
+  String get signInWithApple => 'الدخول بواسطة Apple';
+
+  @override
+  String get orderStatusPlaced => 'تم الطلب';
+
+  @override
+  String get orderStatusProcessing => 'قيد المعالجة';
+
+  @override
+  String get orderStatusDeliveredLabel => 'تم التوصيل';
+
+  @override
+  String get orderStatusCancelledLabel => 'ملغي';
+
+  @override
+  String get filterAll => 'الكل';
+
+  @override
+  String get filterOrderPlaced => 'تم الطلب';
+
+  @override
+  String get filterProcessing => 'قيد المعالجة';
+
+  @override
+  String get filterDelivered => 'تم التوصيل';
+
+  @override
+  String get filterCancelled => 'ملغي';
+
+  @override
+  String get selectLanguage => 'اختر اللغة';
+
+  @override
+  String get selectCurrency => 'اختر العملة';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get arabicSubtitle => 'Arabic';
+
+  @override
+  String get englishSubtitle => 'English';
+
+  @override
+  String get popularProductsTitle => 'المنتجات الشائعة';
+
+  @override
+  String selectOptionFirst(String option) {
+    return 'الرجاء اختيار $option أولاً';
+  }
+
+  @override
+  String get hideReviews => 'إخفاء التقييمات';
+
+  @override
+  String get priceChangedError =>
+      'تغير سعر بعض المنتجات. أعد إضافة المنتج للسلة.';
+
+  @override
+  String get googleSignInRequired =>
+      'لقد قمت بالتسجيل باستخدام جوجل مسبقاً. الرجاء تسجيل الدخول باستخدام حساب جوجل.';
 }

@@ -79,6 +79,7 @@ class _ResetPasswordOtpScreenState
 
   void _resendOtp() {
     setState(() => _errorMessage = null);
+    final l10n = AppLocalizations.of(context)!;
     final repo = ref.read(authRepositoryProvider);
     repo.sendOtp(
       phoneNumber: widget.phone,
@@ -89,7 +90,7 @@ class _ResetPasswordOtpScreenState
       },
       onError: (error) {
         if (!mounted) return;
-        setState(() => _errorMessage = 'فشل إعادة الإرسال. حاول مرة أخرى.');
+        setState(() => _errorMessage = l10n.resendFailed);
       },
     );
   }
@@ -99,10 +100,11 @@ class _ResetPasswordOtpScreenState
   Future<void> _submitReset() async {
     if (_isLoading) return;
     if (_currentVerificationId == null) return;
+    final l10n = AppLocalizations.of(context)!;
 
     // Validate OTP
     if (_otpCode.length != 6) {
-      setState(() => _errorMessage = 'أدخل رمز التحقق كاملاً (6 أرقام)');
+      setState(() => _errorMessage = l10n.otpCodeRequired);
       return;
     }
 
@@ -110,11 +112,11 @@ class _ResetPasswordOtpScreenState
     final password = _passwordController.text.trim();
     final confirmPassword = _confirmPasswordController.text.trim();
     if (password.length < 8) {
-      setState(() => _errorMessage = 'كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+      setState(() => _errorMessage = l10n.passwordMin8);
       return;
     }
     if (password != confirmPassword) {
-      setState(() => _errorMessage = 'كلمتا المرور غير متطابقتين');
+      setState(() => _errorMessage = l10n.passwordsDoNotMatch);
       return;
     }
 
@@ -144,6 +146,7 @@ class _ResetPasswordOtpScreenState
   }
 
   void _showSuccessDialog() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -164,14 +167,14 @@ class _ResetPasswordOtpScreenState
             ),
             const SizedBox(height: 20),
             Text(
-              'تم بنجاح!',
+              l10n.passwordResetSuccess,
               style: AppTypography.titleLarge.copyWith(
                   fontWeight: FontWeight.bold, color: AppColors.textPrimary),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
             Text(
-              'تم تغيير كلمة المرور بنجاح.\nيمكنك الآن تسجيل الدخول بكلمة مرورك الجديدة.',
+              l10n.passwordChangedSuccess,
               style: AppTypography.bodyMedium.copyWith(
                   color: AppColors.textSecondary, height: 1.6),
               textAlign: TextAlign.center,
@@ -193,7 +196,7 @@ class _ResetPasswordOtpScreenState
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: Text(
-                  'تسجيل الدخول',
+                  l10n.login,
                   style: AppTypography.titleLarge.copyWith(
                       fontWeight: FontWeight.bold),
                 ),
@@ -216,6 +219,7 @@ class _ResetPasswordOtpScreenState
   @override
   Widget build(BuildContext context) {
     final phoneDisplay = '\u202A${widget.phone}\u202C';
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -266,7 +270,7 @@ class _ResetPasswordOtpScreenState
               const SizedBox(height: AppSpacing.xl),
 
               Text(
-                'أدخل رمز التحقق',
+                l10n.enterVerificationCode,
                 style: AppTypography.displayMedium.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -275,7 +279,7 @@ class _ResetPasswordOtpScreenState
               ).animate().fadeIn(delay: 100.ms),
               const SizedBox(height: AppSpacing.sm),
               Text(
-                'تم إرسال رمز مكون من 6 أرقام إلى\n$phoneDisplay',
+                l10n.otpSentTo(phoneDisplay),
                 style: AppTypography.bodyLarge.copyWith(
                   color: AppColors.textSecondary,
                   height: 1.6,
@@ -351,8 +355,8 @@ class _ResetPasswordOtpScreenState
                 onPressed: _resendEnabled ? _resendOtp : null,
                 child: Text(
                   _resendEnabled
-                      ? 'إعادة إرسال الرمز'
-                      : 'إعادة الإرسال خلال $_resendSecondsث',
+                      ? l10n.resendCode
+                      : l10n.resendInSeconds(_resendSeconds),
                   style: AppTypography.bodyMedium.copyWith(
                     color: _resendEnabled
                         ? AppColors.gold
@@ -368,7 +372,7 @@ class _ResetPasswordOtpScreenState
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  'كلمة المرور الجديدة',
+                  l10n.newPasswordLabel,
                   style: AppTypography.labelLarge.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -383,7 +387,7 @@ class _ResetPasswordOtpScreenState
                 style: AppTypography.bodyLarge,
                 textDirection: TextDirection.ltr,
                 decoration: InputDecoration(
-                  labelText: 'كلمة المرور الجديدة',
+                  labelText: l10n.newPasswordLabel,
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
@@ -419,7 +423,7 @@ class _ResetPasswordOtpScreenState
                 style: AppTypography.bodyLarge,
                 textDirection: TextDirection.ltr,
                 decoration: InputDecoration(
-                  labelText: 'تأكيد كلمة المرور',
+                  labelText: l10n.confirmPasswordLabel,
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
@@ -465,7 +469,7 @@ class _ResetPasswordOtpScreenState
 
               // Submit button
               AppButton(
-                text: 'تغيير كلمة المرور',
+                text: l10n.changePassword,
                 isLoading: _isLoading,
                 onPressed: _submitReset,
               ).animate().fadeIn(delay: 600.ms),

@@ -103,7 +103,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2))),
               const SizedBox(height: 16),
-              Text('اختر العملة', style: AppTypography.titleLarge.copyWith(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context)!.selectCurrency, style: AppTypography.titleLarge.copyWith(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               const Divider(),
               Flexible(
@@ -146,12 +146,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               Container(width: 40, height: 4, decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2))),
               const SizedBox(height: 16),
-              Text('اختر اللغة / Select Language', style: AppTypography.titleLarge.copyWith(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context)!.selectLanguage, style: AppTypography.titleLarge.copyWith(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               const Divider(),
               ListTile(
                 leading: const Text('🇰🇼', style: TextStyle(fontSize: 24)),
-                title: Text('العربية', style: AppTypography.bodyMedium.copyWith(fontWeight: ref.read(localeProvider).languageCode == 'ar' ? FontWeight.bold : FontWeight.normal)),
+                title: Text(AppLocalizations.of(context)!.arabic, style: AppTypography.bodyMedium.copyWith(fontWeight: ref.read(localeProvider).languageCode == 'ar' ? FontWeight.bold : FontWeight.normal)),
                 trailing: ref.read(localeProvider).languageCode == 'ar' ? const Icon(Icons.check, color: AppColors.gold) : null,
                 onTap: () {
                   ref.read(localeProvider.notifier).setLocale('ar');
@@ -287,7 +287,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('جميع المنتجات', style: AppTypography.titleLarge),
+          Text(AppLocalizations.of(context)!.allProducts, style: AppTypography.titleLarge),
           const SizedBox(height: 12),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -357,7 +357,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 8),
               child: _SubCategoryChip(
-                label: 'الكل',
+                label: AppLocalizations.of(context)!.all,
                 isSelected: _subCategoryId == null,
                 onTap: () => setState(() => _subCategoryId = null),
               ),

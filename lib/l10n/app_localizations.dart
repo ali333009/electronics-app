@@ -2407,6 +2407,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to exit the app?'**
   String get exitConfirm;
+
+  /// No description provided for @standardDeliveryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard Delivery'**
+  String get standardDeliveryLabel;
+
+  /// No description provided for @freeShippingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Free shipping 🎉'**
+  String get freeShippingLabel;
+
+  /// No description provided for @expressDeliveryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Express Delivery ⚡'**
+  String get expressDeliveryLabel;
+
+  /// No description provided for @freeShippingThreshold.
+  ///
+  /// In en, this message translates to:
+  /// **'Only {price} left for free shipping 🚚'**
+  String freeShippingThreshold(String price);
+
+  /// No description provided for @preferredDeliveryTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferred Delivery Time'**
+  String get preferredDeliveryTime;
+
+  /// No description provided for @chooseDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose date'**
+  String get chooseDate;
+
+  /// No description provided for @phoneLoginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Login'**
+  String get phoneLoginTitle;
+
+  /// No description provided for @phoneLoginSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number to receive a verification code'**
+  String get phoneLoginSubtitle;
+
+  /// No description provided for @phoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneLabel;
+
+  /// No description provided for @phoneHintExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: 66123456'**
+  String get phoneHintExample;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueButton;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome!'**
+  String get welcomeTitle;
+
+  /// No description provided for @completeProfileSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete your information so we can deliver your orders successfully'**
+  String get completeProfileSubtitle;
+
+  /// No description provided for @optionalHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optionalHint;
+
+  /// No description provided for @saveAndContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Continue'**
+  String get saveAndContinue;
+
+  /// No description provided for @otpEnterCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter verification code'**
+  String get otpEnterCode;
+
+  /// No description provided for @otpSentTo.
+  ///
+  /// In en, this message translates to:
+  /// **'A 6-digit code has been sent to\n{phone}'**
+  String otpSentTo(String phone);
+
+  /// No description provided for @resendFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend failed. Try again.'**
+  String get resendFailed;
+
+  /// No description provided for @otpCodeRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the full 6-digit code'**
+  String get otpCodeRequired;
+
+  /// No description provided for @passwordMin8.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get passwordMin8;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @passwordChangedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed successfully!\nYou can now log in with your new password.'**
+  String get passwordChangedSuccess;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePassword;
+
+  /// No description provided for @enterVerificationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Verification Code'**
+  String get enterVerificationCode;
+
+  /// No description provided for @resendInSeconds.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in {seconds}s'**
+  String resendInSeconds(int seconds);
+
+  /// No description provided for @newPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPasswordLabel;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @invalidPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid phone number. Check country code and number.'**
+  String get invalidPhoneNumber;
+
+  /// No description provided for @tooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Try again later.'**
+  String get tooManyRequests;
+
+  /// No description provided for @connectionError.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection error.'**
+  String get connectionError;
+
+  /// No description provided for @genericError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred. Check the number and try again.'**
+  String get genericError;
+
+  /// No description provided for @enterValidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number'**
+  String get enterValidPhone;
+
+  /// No description provided for @sendVerificationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Verification Code'**
+  String get sendVerificationCode;
+
+  /// No description provided for @loginWithPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Phone (OTP)'**
+  String get loginWithPhone;
+
+  /// No description provided for @signInWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Apple'**
+  String get signInWithApple;
+
+  /// No description provided for @orderStatusPlaced.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Placed'**
+  String get orderStatusPlaced;
+
+  /// No description provided for @orderStatusProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get orderStatusProcessing;
+
+  /// No description provided for @orderStatusDeliveredLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get orderStatusDeliveredLabel;
+
+  /// No description provided for @orderStatusCancelledLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get orderStatusCancelledLabel;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @filterOrderPlaced.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Placed'**
+  String get filterOrderPlaced;
+
+  /// No description provided for @filterProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get filterProcessing;
+
+  /// No description provided for @filterDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get filterDelivered;
+
+  /// No description provided for @filterCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get filterCancelled;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @selectCurrency.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Currency'**
+  String get selectCurrency;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @arabicSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabicSubtitle;
+
+  /// No description provided for @englishSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get englishSubtitle;
+
+  /// No description provided for @popularProductsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular Products'**
+  String get popularProductsTitle;
+
+  /// No description provided for @selectOptionFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select {option} first'**
+  String selectOptionFirst(String option);
+
+  /// No description provided for @hideReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide Reviews'**
+  String get hideReviews;
+
+  /// No description provided for @priceChangedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Some product prices have changed. Please re-add them to cart.'**
+  String get priceChangedError;
+
+  /// No description provided for @googleSignInRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'You previously signed up with Google. Please sign in with Google.'**
+  String get googleSignInRequired;
 }
 
 class _AppLocalizationsDelegate

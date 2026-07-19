@@ -89,7 +89,7 @@ class _PhoneLoginScreenState extends ConsumerState<PhoneLoginScreen> {
               children: [
                 const SizedBox(height: AppSpacing.xl),
                 Text(
-                  'تسجيل الدخول برقم الهاتف',
+                  t.phoneLoginTitle,
                   style: AppTypography.displayMedium.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -98,7 +98,7 @@ class _PhoneLoginScreenState extends ConsumerState<PhoneLoginScreen> {
                 ).animate().fadeIn(duration: 400.ms),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  'أدخل رقم هاتفك لتصلك رسالة التفعيل',
+                  t.phoneLoginSubtitle,
                   style: AppTypography.bodyLarge.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -142,8 +142,8 @@ class _PhoneLoginScreenState extends ConsumerState<PhoneLoginScreen> {
                       Expanded(
                         child: AppTextField(
                           controller: _phoneController,
-                          label: 'رقم الهاتف',
-                          hint: 'مثال: 66123456',
+                          label: t.phoneLabel,
+                          hint: t.phoneHintExample,
                           keyboardType: TextInputType.phone,
                           validator: (v) {
                             if (v == null || v.isEmpty) return t.phoneRequired;
@@ -159,7 +159,7 @@ class _PhoneLoginScreenState extends ConsumerState<PhoneLoginScreen> {
                 SizedBox(
                   height: 56,
                   child: AppButton(
-                    text: 'متابعة',
+                    text: t.continueButton,
                     onPressed: _submit,
                   ),
                 ).animate().fadeIn(delay: 300.ms, duration: 400.ms),

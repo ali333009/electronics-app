@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ShippingSettings {
@@ -6,8 +7,10 @@ class ShippingSettings {
   final double shippingCost;
   final double fastShippingCost;
   final int availableDaysCount;
-  final String normalDescription;
-  final String expressDescription;
+  final String normalDescriptionAr;
+  final String normalDescriptionEn;
+  final String expressDescriptionAr;
+  final String expressDescriptionEn;
   final List<String> expressTimeSlots;
 
   const ShippingSettings({
@@ -15,8 +18,10 @@ class ShippingSettings {
     this.shippingCost = 30,
     this.fastShippingCost = 60,
     this.availableDaysCount = 3,
-    this.normalDescription = 'توصيل خلال 3-5 أيام',
-    this.expressDescription = 'توصيل خلال 24 ساعة',
+    this.normalDescriptionAr = 'توصيل خلال 3-5 أيام',
+    this.normalDescriptionEn = 'Delivery within 3-5 days',
+    this.expressDescriptionAr = 'توصيل خلال 24 ساعة',
+    this.expressDescriptionEn = 'Delivery within 24 hours',
     this.expressTimeSlots = const [],
   });
 
@@ -27,11 +32,19 @@ class ShippingSettings {
       shippingCost: _readDouble(data['shippingCost'] ?? data['shippingFee'], 30),
       fastShippingCost: _readDouble(data['fastShippingCost'] ?? data['fastShippingFee'], 60),
       availableDaysCount: (data['availableDaysCount'] as num?)?.toInt() ?? 3,
-      normalDescription: (data['normalDescription'] as String?) ?? 'توصيل خلال 3-5 أيام',
-      expressDescription: (data['expressDescription'] as String?) ?? 'توصيل خلال 24 ساعة',
+      normalDescriptionAr: (data['normalDescriptionAr'] as String?) ?? (data['normalDescription'] as String?) ?? 'توصيل خلال 3-5 أيام',
+      normalDescriptionEn: (data['normalDescriptionEn'] as String?) ?? 'Delivery within 3-5 days',
+      expressDescriptionAr: (data['expressDescriptionAr'] as String?) ?? (data['expressDescription'] as String?) ?? 'توصيل خلال 24 ساعة',
+      expressDescriptionEn: (data['expressDescriptionEn'] as String?) ?? 'Delivery within 24 hours',
       expressTimeSlots: (data['expressTimeSlots'] as List<dynamic>?)?.cast<String>() ?? [],
     );
   }
+
+  String localizedNormalDescription(Locale locale) =>
+      locale.languageCode == 'en' ? normalDescriptionEn : normalDescriptionAr;
+
+  String localizedExpressDescription(Locale locale) =>
+      locale.languageCode == 'en' ? expressDescriptionEn : expressDescriptionAr;
 
   bool get isAlwaysFree => shippingCost <= 0 || freeShippingThreshold <= 0;
 

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -38,10 +39,10 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
       duration: const Duration(milliseconds: 750),
     );
-    _logoScale = Tween<double>(begin: 0.78, end: 1.0).animate(
+    _logoScale = Tween<double>(begin: 1.0, end: 1.0).animate(
       CurvedAnimation(parent: _logoController, curve: Curves.easeOutBack),
     );
-    _logoOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _logoOpacity = Tween<double>(begin: 1.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _logoController,
         curve: const Interval(0.0, 0.65, curve: Curves.easeIn),
@@ -88,7 +89,11 @@ class _SplashScreenState extends State<SplashScreen>
     if (_logoUrl != null && mounted) {
       await precacheImage(NetworkImage(_logoUrl!), context);
     }
-    // step 1 — logo pops in
+    
+    // Now that everything is loaded and our screen is at 100% opacity, we hide the native OS splash.
+    FlutterNativeSplash.remove();
+
+    // step 1 — logo pops in (already at 1.0 scale/opacity now to prevent flash)
     await _logoController.forward();
 
     // step 2 — shimmer sweeps across logo (2 passes)

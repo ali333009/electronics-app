@@ -457,7 +457,7 @@ class _PhoneVerificationScreenState
                                   ),
                                 ),
                                   child: Text(
-                                    'إعادة إرسال الرمز',
+                                    AppLocalizations.of(context)!.resendCode,
                                     style: AppTypography.titleLarge.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),

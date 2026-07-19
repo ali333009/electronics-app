@@ -103,7 +103,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       const Icon(Icons.local_fire_department_rounded, color: AppColors.gold, size: 20),
                       const SizedBox(width: 8),
                       Text(
-                        'المنتجات الشائعة',
+                        AppLocalizations.of(context)!.popularProductsTitle,
                         style: AppTypography.titleLarge.copyWith(color: AppColors.gold),
                       ),
                     ] else if (results.isNotEmpty && !isLoading) ...[

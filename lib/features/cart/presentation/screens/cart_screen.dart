@@ -279,7 +279,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
           AppToast.show(
             context,
             AppLocalizations.of(context)!
-                .cartError('تغير سعر بعض المنتجات. أعد إضافة المنتج للسلة.'),
+                .cartError(AppLocalizations.of(context)!.priceChangedError),
             icon: Icons.warning_amber_rounded,
           );
           return;

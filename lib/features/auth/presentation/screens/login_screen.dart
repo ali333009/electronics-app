@@ -352,7 +352,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                         const SizedBox(height: AppSpacing.md),
                         AppButton(
-                          text: 'الدخول برقم الهاتف (OTP)',
+                          text: t.loginWithPhone,
                           isOutlined: true,
                           icon: Icons.phone_android,
                           onPressed: () async {
@@ -389,7 +389,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         if (!kIsWeb && Platform.isIOS) ...[
                           const SizedBox(height: AppSpacing.md),
                           AppleSignInButton(
-                            label: 'الدخول بواسطة Apple',
+                            label: t.signInWithApple,
                             isLoading: _isAppleLoading,
                             onPressed: _loginWithApple,
                           ),

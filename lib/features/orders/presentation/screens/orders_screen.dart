@@ -176,10 +176,10 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
       child: Row(
         children: [
           _buildFilterChip(OrderFilter.all, AppLocalizations.of(context)!.all, countForFilter(OrderFilter.all)),
-          _buildFilterChip(OrderFilter.placed, 'تم الطلب', countForFilter(OrderFilter.placed)),
-          _buildFilterChip(OrderFilter.processing, 'قيد المعالجة', countForFilter(OrderFilter.processing)),
-          _buildFilterChip(OrderFilter.delivered, 'تم التوصيل', countForFilter(OrderFilter.delivered)),
-          _buildFilterChip(OrderFilter.cancelled, 'ملغي', countForFilter(OrderFilter.cancelled)),
+          _buildFilterChip(OrderFilter.placed, AppLocalizations.of(context)!.filterOrderPlaced, countForFilter(OrderFilter.placed)),
+          _buildFilterChip(OrderFilter.processing, AppLocalizations.of(context)!.filterProcessing, countForFilter(OrderFilter.processing)),
+          _buildFilterChip(OrderFilter.delivered, AppLocalizations.of(context)!.filterDelivered, countForFilter(OrderFilter.delivered)),
+          _buildFilterChip(OrderFilter.cancelled, AppLocalizations.of(context)!.filterCancelled, countForFilter(OrderFilter.cancelled)),
         ],
       ),
     );
@@ -477,16 +477,17 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
   }
 
   String _statusLabel(OrderStatus status) {
+    final l10n = AppLocalizations.of(context)!;
     switch (status) {
       case OrderStatus.pending:
-        return 'تم الطلب';
+        return l10n.orderStatusPlaced;
       case OrderStatus.confirmed:
       case OrderStatus.shipped:
-        return 'قيد المعالجة';
+        return l10n.orderStatusProcessing;
       case OrderStatus.delivered:
-        return 'تم التوصيل';
+        return l10n.orderStatusDeliveredLabel;
       case OrderStatus.cancelled:
-        return 'ملغي';
+        return l10n.orderStatusCancelledLabel;
     }
   }
 

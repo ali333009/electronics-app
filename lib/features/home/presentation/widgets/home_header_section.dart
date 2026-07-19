@@ -69,7 +69,7 @@ class HomeHeaderSection extends ConsumerWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(ref.watch(localeProvider).languageCode == 'ar' ? 'عربي' : 'EN', style: AppTypography.captionBold.copyWith(fontWeight: FontWeight.w700, color: AppColors.gold)),
+                            Text(ref.watch(localeProvider).languageCode == 'ar' ? AppLocalizations.of(context)!.arabic : 'EN', style: AppTypography.captionBold.copyWith(fontWeight: FontWeight.w700, color: AppColors.gold)),
                             const SizedBox(width: 4),
                             const Icon(Icons.language, color: AppColors.gold, size: 16),
                           ],

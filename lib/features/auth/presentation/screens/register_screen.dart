@@ -457,7 +457,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         if (!kIsWeb && Platform.isIOS) ...[
                           const SizedBox(height: AppSpacing.md),
                           AppleSignInButton(
-                            label: 'الدخول بواسطة Apple',
+                            label: t.signInWithApple,
                             isLoading: _isAppleLoading,
                             onPressed: _loginWithApple,
                           ),

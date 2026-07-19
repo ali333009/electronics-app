@@ -3,12 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+import 'package:elct/l10n/app_localizations.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/router/routes.dart';
 import '../providers/auth_provider.dart';
+import '../widgets/country_picker_widget.dart';
 
 class ResetPasswordPhoneScreen extends ConsumerStatefulWidget {
   const ResetPasswordPhoneScreen({super.key});
@@ -21,7 +23,7 @@ class ResetPasswordPhoneScreen extends ConsumerStatefulWidget {
 class _ResetPasswordPhoneScreenState
     extends ConsumerState<ResetPasswordPhoneScreen> {
   final _phoneController = TextEditingController();
-  final _countryCodeController = TextEditingController(text: '+20');
+  CountryCode _selectedCountry = countries.first;
   final _formKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
@@ -30,12 +32,11 @@ class _ResetPasswordPhoneScreenState
   @override
   void dispose() {
     _phoneController.dispose();
-    _countryCodeController.dispose();
     super.dispose();
   }
 
   String get _fullPhone =>
-      '${_countryCodeController.text.trim()}${_phoneController.text.trim()}';
+      '${_selectedCountry.code}${_phoneController.text.trim()}';
 
   Future<void> _sendOtp() async {
     if (_isLoading) return;
@@ -67,21 +68,36 @@ class _ResetPasswordPhoneScreenState
     );
   }
 
+  void _showCountryPickerDialog() {
+    showCountryPickerDialog(
+      context: context,
+      selectedCountry: _selectedCountry,
+      countries: countries,
+      onCountrySelected: (country) {
+        setState(() {
+          _selectedCountry = country;
+        });
+      },
+    );
+  }
+
   String _mapError(String code) {
+    final l10n = AppLocalizations.of(context)!;
     switch (code) {
       case 'INVALID_PHONE':
-        return 'رقم الهاتف غير صحيح. تأكد من كود الدولة والرقم.';
+        return l10n.invalidPhoneNumber;
       case 'TOO_MANY_ATTEMPTS':
-        return 'محاولات كثيرة جداً. حاول لاحقاً.';
+        return l10n.tooManyRequests;
       case 'NETWORK_ERROR':
-        return 'خطأ في الاتصال بالإنترنت.';
+        return l10n.connectionError;
       default:
-        return 'حدث خطأ. تأكد من الرقم وحاول مجدداً.';
+        return l10n.genericError;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -146,7 +162,7 @@ class _ResetPasswordPhoneScreenState
 
                 // Title
                 Text(
-                  'إعادة تعيين كلمة المرور',
+                  l10n.setNewPassword,
                   style: AppTypography.displayMedium.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
@@ -157,7 +173,7 @@ class _ResetPasswordPhoneScreenState
 
                 // Subtitle
                 Text(
-                  'أدخل رقم هاتفك المسجل لتلقي رمز التحقق',
+                  l10n.phoneLoginSubtitle,
                   style: AppTypography.bodyLarge.copyWith(
                     color: AppColors.textSecondary,
                     height: 1.6,
@@ -167,86 +183,46 @@ class _ResetPasswordPhoneScreenState
                 const SizedBox(height: AppSpacing.xxl),
 
                 // Phone field
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Country code
-                    SizedBox(
-                      width: 80,
-                      child: TextFormField(
-                        controller: _countryCodeController,
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.phone,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r'[+\d]')),
-                          LengthLimitingTextInputFormatter(5),
-                        ],
-                        style: AppTypography.bodyLarge,
-                        decoration: InputDecoration(
-                          labelText: 'كود',
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                                color: AppColors.border, width: 1.5),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                                color: AppColors.border, width: 1.5),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                                color: AppColors.gold, width: 1.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    // Phone number
-                    Expanded(
-                      child: TextFormField(
-                        controller: _phoneController,
-                        keyboardType: TextInputType.phone,
-                        textDirection: TextDirection.ltr,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(15),
-                        ],
-                        style: AppTypography.bodyLarge,
-                        decoration: InputDecoration(
-                          labelText: 'رقم الهاتف',
-                          hintText: '01XXXXXXXXX',
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                                color: AppColors.border, width: 1.5),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                                color: AppColors.border, width: 1.5),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                                color: AppColors.gold, width: 1.5),
-                          ),
-                        ),
-                        validator: (v) {
-                          if (v == null || v.trim().length < 9) {
-                            return 'أدخل رقم هاتف صحيح';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                TextFormField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  textDirection: TextDirection.ltr,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(15),
                   ],
+                  style: AppTypography.bodyLarge,
+                  decoration: InputDecoration(
+                    labelText: l10n.phoneNumber,
+                    hintText: '01XXXXXXXXX',
+                    filled: true,
+                    fillColor: Colors.white,
+                    prefixIcon: CountryPickerPrefix(
+                      selectedCountry: _selectedCountry,
+                      onTap: _showCountryPickerDialog,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: const BorderSide(
+                          color: AppColors.border, width: 1.5),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: const BorderSide(
+                          color: AppColors.border, width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: const BorderSide(
+                          color: AppColors.gold, width: 1.5),
+                    ),
+                  ),
+                  validator: (v) {
+                    if (v == null || v.trim().length < 8) {
+                      return l10n.enterValidPhone;
+                    }
+                    return null;
+                  },
                 ).animate().fadeIn(delay: 300.ms, duration: 400.ms),
                 const SizedBox(height: AppSpacing.sm),
 
@@ -267,7 +243,7 @@ class _ResetPasswordPhoneScreenState
 
                 // Send OTP button
                 AppButton(
-                  text: 'إرسال رمز التحقق',
+                  text: l10n.sendVerificationCode,
                   isLoading: _isLoading,
                   onPressed: _sendOtp,
                 ).animate().fadeIn(delay: 400.ms, duration: 400.ms),

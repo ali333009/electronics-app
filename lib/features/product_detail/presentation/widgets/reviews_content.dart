@@ -151,7 +151,7 @@ class _ReviewsContentState extends State<ReviewsContent> {
               child: TextButton(
                 onPressed: () => setState(() => _showAllReviews = !_showAllReviews),
                 child: Text(
-                  _showAllReviews ? "إخفاء التقييمات" : '${AppLocalizations.of(context)!.viewAll} (${AppLocalizations.of(context)!.reviewCount(widget.reviews.length)})',
+                  _showAllReviews ? AppLocalizations.of(context)!.hideReviews : '${AppLocalizations.of(context)!.viewAll} (${AppLocalizations.of(context)!.reviewCount(widget.reviews.length)})',
                   style: const TextStyle(fontFamily: 'Cairo', fontSize: 13, color: AppColors.gold),
                 ),
               ),
