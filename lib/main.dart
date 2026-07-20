@@ -106,7 +106,14 @@ Future<void> _runApp() async {
 
 Future<void> _initializeOnlineServices() async {
   try {
-    // GoogleSignIn initialization is handled on demand
+    String? clientId;
+    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
+      clientId = '156963900259-hfhf44uvpnjrlbmdh91cevfng26n78pq.apps.googleusercontent.com';
+    }
+    await GoogleSignIn.instance.initialize(
+      clientId: clientId,
+      serverClientId: '156963900259-365snd88da1huq4ksjt9rjnhbpsdf2i7.apps.googleusercontent.com',
+    );
   } catch (e) {
     logDebug('[Main] GoogleSignIn init failed: $e');
   }

@@ -680,6 +680,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       if (uid == null) return;
     }
 
+    // Capture context-dependent values BEFORE any async gap
+    final router = GoRouter.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -715,10 +719,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       if (password == null || password.isEmpty) return;
     }
 
-    if (!context.mounted) return;
-    // Capture the router before the async gap to avoid context issues
-    final router = GoRouter.of(context);
-
     try {
       await repo.deleteCurrentUser(password: password);
       // Defer navigation to next microtask so the widget tree
@@ -727,10 +727,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         router.go(Routes.login);
       });
     } catch (e) {
-      if (!context.mounted) return;
-      AppToast.show(context, userErrorMessage(e, l10n), icon: Icons.error_outline);
+      messenger.showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Icons.error_outline, color: Colors.white, size: 20),
+              const SizedBox(width: 8),
+              Flexible(child: Text(userErrorMessage(e, l10n))),
+            ],
+          ),
+          backgroundColor: const Color(0xFF2A2A2A),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
     }
   }
+
 
   Future<String?> _showPasswordDialog(AppLocalizations l10n) {
     return showDialog<String>(

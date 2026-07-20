@@ -177,16 +177,7 @@ class AuthDatasource {
         user = userCred.user;
       } else {
         try {
-          String? clientId;
-          if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
-            clientId = '156963900259-hfhf44uvpnjrlbmdh91cevfng26n78pq.apps.googleusercontent.com';
-          }
-          final googleSignIn = GoogleSignIn(
-            clientId: clientId,
-            serverClientId: '156963900259-365snd88da1huq4ksjt9rjnhbpsdf2i7.apps.googleusercontent.com',
-          );
-          final googleUser = await googleSignIn.signIn();
-          if (googleUser == null) throw StateError('GOOGLE_SIGN_IN_CANCELLED');
+          final googleUser = await GoogleSignIn.instance.authenticate();
           final googleAuth = googleUser.authentication;
           final credential = GoogleAuthProvider.credential(
             idToken: googleAuth.idToken,
@@ -309,7 +300,7 @@ class AuthDatasource {
         false;
     if (hasGoogleProvider) {
       try {
-        await GoogleSignIn().signOut();
+        await GoogleSignIn.instance.signOut();
       } catch (_) {}
     }
     await _auth.signOut();
@@ -430,16 +421,7 @@ class AuthDatasource {
   }
 
   Future<void> reauthenticateWithGoogle() async {
-    String? clientId;
-    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
-      clientId = '156963900259-hfhf44uvpnjrlbmdh91cevfng26n78pq.apps.googleusercontent.com';
-    }
-    final googleSignIn = GoogleSignIn(
-      clientId: clientId,
-      serverClientId: '156963900259-365snd88da1huq4ksjt9rjnhbpsdf2i7.apps.googleusercontent.com',
-    );
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) throw StateError('GOOGLE_SIGN_IN_CANCELLED');
+    final googleUser = await GoogleSignIn.instance.authenticate();
     final googleAuth = googleUser.authentication;
     final credential = GoogleAuthProvider.credential(
       idToken: googleAuth.idToken,
