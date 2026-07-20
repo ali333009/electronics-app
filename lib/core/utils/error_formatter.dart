@@ -40,6 +40,8 @@ String userErrorMessage(Object error, AppLocalizations l10n) {
         return l10n.googleSignInCancelled;
       case 'GOOGLE_SIGN_IN_FAILED':
         return l10n.unexpectedError;
+      case 'APPLE_SIGN_IN_FAILED':
+        return l10n.unexpectedError;
       case 'APP_NOT_AUTHORIZED':
       case 'MISSING_CLIENT_IDENTIFIER':
       case 'INTERNAL_ERROR':

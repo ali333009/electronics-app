@@ -547,9 +547,9 @@ class AuthDatasource {
         displayName: user.displayName,
       );
     } on FirebaseAuthException catch (e) {
-      throw StateError(e.code);
+      throw StateError(_mapErrorCode(e));
     } catch (e) {
-      throw StateError(e.toString());
+      throw StateError('INTERNAL_ERROR');
     }
   }
 
