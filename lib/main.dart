@@ -106,7 +106,7 @@ Future<void> _runApp() async {
 
 Future<void> _initializeOnlineServices() async {
   try {
-    await GoogleSignIn.instance.initialize();
+    // GoogleSignIn initialization is handled on demand
   } catch (e) {
     logDebug('[Main] GoogleSignIn init failed: $e');
   }

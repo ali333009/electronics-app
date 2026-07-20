@@ -32,6 +32,7 @@
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>com.googleusercontent.apps.156963900259-hfhf44uvpnjrlbmdh91cevfng26n78pq</string>
+					<string>com.elct.app</string>
 				</array>
 			</dict>
 		</array>
