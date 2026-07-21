@@ -28,6 +28,7 @@ class _ReviewsContentState extends State<ReviewsContent> {
   bool _isAddReviewExpanded = false;
   bool _showAllReviews = false;
   double _rating = 0.0;
+  bool _isSubmitting = false;
   final _commentController = TextEditingController();
 
   @override
@@ -229,28 +230,41 @@ class _ReviewsContentState extends State<ReviewsContent> {
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                         ),
-                        onPressed: _rating > 0
+                        onPressed: (_rating > 0 && !_isSubmitting)
                             ? () async {
-                                final review = ReviewModel(
-                                  id: 'user_${DateTime.now().millisecondsSinceEpoch}',
-                                  productId: widget.productId,
-                                  userId: widget.userId!,
-                                  userName: widget.userName ?? AppLocalizations.of(context)!.defaultUserName,
-                                  rating: _rating,
-                                  comment: _commentController.text.trim().isEmpty ? AppLocalizations.of(context)!.reviewDefaultComment : _commentController.text.trim(),
-                                  date: DateTime.now(),
-                                );
-                                await widget.onAddReview(review);
-                                if (!context.mounted) return;
-                                setState(() {
-                                  _isAddReviewExpanded = false;
-                                  _rating = 0.0;
-                                  _commentController.clear();
-                                });
-                                AppToast.show(context, AppLocalizations.of(context)!.reviewSubmitted, icon: Icons.star);
+                                setState(() => _isSubmitting = true);
+                                try {
+                                  final review = ReviewModel(
+                                    id: 'user_${DateTime.now().millisecondsSinceEpoch}',
+                                    productId: widget.productId,
+                                    userId: widget.userId!,
+                                    userName: widget.userName ?? AppLocalizations.of(context)!.defaultUserName,
+                                    rating: _rating,
+                                    comment: _commentController.text.trim().isEmpty ? AppLocalizations.of(context)!.reviewDefaultComment : _commentController.text.trim(),
+                                    date: DateTime.now(),
+                                  );
+                                  await widget.onAddReview(review);
+                                  if (!context.mounted) return;
+                                  setState(() {
+                                    _isAddReviewExpanded = false;
+                                    _rating = 0.0;
+                                    _commentController.clear();
+                                  });
+                                  AppToast.show(context, AppLocalizations.of(context)!.reviewSubmitted, icon: Icons.star);
+                                } finally {
+                                  if (mounted) {
+                                    setState(() => _isSubmitting = false);
+                                  }
+                                }
                               }
                             : null,
-                        child: Text(AppLocalizations.of(context)!.confirm, style: const TextStyle(fontFamily: 'Cairo', fontWeight: FontWeight.w600)),
+                        child: _isSubmitting 
+                            ? const SizedBox(
+                                height: 20, 
+                                width: 20, 
+                                child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.textDark)
+                              ) 
+                            : Text(AppLocalizations.of(context)!.confirm, style: const TextStyle(fontFamily: 'Cairo', fontWeight: FontWeight.w600)),
                       ),
                     ),
                   ],

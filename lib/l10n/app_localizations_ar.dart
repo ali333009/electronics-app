@@ -121,7 +121,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get latestProducts => 'جديد المتجر';
 
   @override
-  String get bestSeller => 'الأكثر مبيعاً';
+  String get bestSeller => 'الأكثر مبيعاً';
 
   @override
   String get newLabel => 'جديد';
@@ -723,7 +723,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sectionNewArrivals => 'جديد المتجر';
 
   @override
-  String get sectionBestSellers => 'الأكثر مبيعاً';
+  String get sectionBestSellers => 'الأكثر مبيعاً';
 
   @override
   String get sectionExclusive => 'حصرية المتجر';

@@ -330,32 +330,16 @@ class AuthDatasource {
     final user = _auth.currentUser;
     if (user == null) throw StateError('NO_USER');
 
-    // Re-authenticate first if needed (before touching Firestore)
-    try {
-      // Try a dummy re-auth check by getting a fresh token
-      await user.getIdToken(true);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'requires-recent-login') {
-        if (password != null && password.isNotEmpty) {
-          final email = user.email;
-          if (email == null || email.isEmpty) throw StateError('NO_EMAIL');
-          final credential = EmailAuthProvider.credential(
-            email: email,
-            password: password,
-          );
-          await user.reauthenticateWithCredential(credential);
-        } else {
-          throw StateError(_mapErrorCode(e));
-        }
-      }
-    }
-
+    final email = user.email;
     final uid = user.uid;
 
     // Step 1: Delete all Firestore data FIRST (while user is still authenticated)
     try {
       final batch = _firestore.batch();
       batch.delete(_firestore.collection('users').doc(uid));
+      if (email != null && email.isNotEmpty) {
+        batch.delete(_firestore.collection('emailAvailability').doc(email.toLowerCase()));
+      }
       final cartSnap = await _firestore
           .collection('users')
           .doc(uid)
@@ -397,20 +381,7 @@ class AuthDatasource {
     try {
       await user.delete();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'requires-recent-login' &&
-          password != null &&
-          password.isNotEmpty) {
-        final email = user.email;
-        if (email == null || email.isEmpty) throw StateError('NO_EMAIL');
-        final credential = EmailAuthProvider.credential(
-          email: email,
-          password: password,
-        );
-        await user.reauthenticateWithCredential(credential);
-        await user.delete();
-      } else {
-        throw StateError(_mapErrorCode(e));
-      }
+      throw StateError(_mapErrorCode(e));
     }
   }
 

@@ -44,7 +44,7 @@
   "popularProducts": "المنتجات الشائعة",
   "featuredProducts": "حصرية المتجر",
   "latestProducts": "جديد المتجر",
-  "bestSeller": "الأكثر مبيعاً",
+  "bestSeller": "الأكثر\u00A0مبيعاً",
   "newLabel": "جديد",
   "exclusive": "حصري",
   "discountPercent": "خصم {percent}%",
@@ -262,7 +262,7 @@
   "moveWithDetails": "تقدم بكل\nتفاصيلك",
   "sectionByCategory": "تسوق حسب القسم",
   "sectionNewArrivals": "جديد المتجر",
-  "sectionBestSellers": "الأكثر مبيعاً",
+  "sectionBestSellers": "الأكثر\u00A0مبيعاً",
   "sectionExclusive": "حصرية المتجر",
 
   "timeMonth": "منذ {count} شهر",

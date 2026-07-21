@@ -18,6 +18,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import '../providers/auth_provider.dart';
 import 'package:elct/features/auth/utils/merge_guest_cart.dart';
 import '../widgets/country_picker_widget.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../../core/widgets/app_toast.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -46,8 +49,29 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   CountryCode _selectedCountry = countries.first;
   Timer? _emailCheckTimer;
 
+  late final TapGestureRecognizer _privacyRecognizer;
+  late final TapGestureRecognizer _termsRecognizer;
+
+  @override
+  void initState() {
+    super.initState();
+    _privacyRecognizer = TapGestureRecognizer()..onTap = () => _openLegalPage('privacy');
+    _termsRecognizer = TapGestureRecognizer()..onTap = () => _openLegalPage('terms');
+  }
+
+  Future<void> _openLegalPage(String section) async {
+    final uri = Uri.parse('https://privacy-policy-vtbf.vercel.app#$section');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
+    } else if (mounted) {
+      AppToast.show(context, AppLocalizations.of(context)!.errorPrefix(''), icon: Icons.error_outline);
+    }
+  }
+
   @override
   void dispose() {
+    _privacyRecognizer.dispose();
+    _termsRecognizer.dispose();
     _emailCheckTimer?.cancel();
     _firstNameController.dispose();
     _lastNameController.dispose();
@@ -685,6 +709,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         color: AppColors.gold,
                         fontWeight: FontWeight.bold,
                       ),
+                      recognizer: _privacyRecognizer,
                     ),
                     TextSpan(text: ' ${t.separatorAnd} '),
                     TextSpan(
@@ -693,6 +718,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         color: AppColors.gold,
                         fontWeight: FontWeight.bold,
                       ),
+                      recognizer: _termsRecognizer,
                     ),
                   ],
                 ),
